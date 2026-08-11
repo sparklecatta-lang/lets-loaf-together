@@ -224,7 +224,7 @@ $processOptions = @{
     "-NonInteractive",
     "-ExecutionPolicy", "Bypass",
     "-WindowStyle", "Hidden",
-    "-File", $processMonitor,
+    "-File", ('"{0}"' -f $processMonitor),
     "-ProcessId", $radioProcess.Id,
         "-PidFileBase64", $encodedPidFile,
         "-OwnerProcessId", $OwnerProcessId,
@@ -240,7 +240,7 @@ $processOptions = @{
     "-NonInteractive",
     "-ExecutionPolicy", "Bypass",
     "-WindowStyle", "Hidden",
-    "-File", $volumeMonitor,
+    "-File", ('"{0}"' -f $volumeMonitor),
     "-ProcessId", $radioProcess.Id,
     "-VolumeFileBase64", $encodedVolumeFile,
     "-PauseFileBase64", $encodedPauseFile
@@ -254,7 +254,7 @@ $processOptions = @{
         "-NonInteractive",
         "-ExecutionPolicy", "Bypass",
         "-WindowStyle", "Hidden",
-        "-File", $metadataHelper,
+        "-File", ('"{0}"' -f $metadataHelper),
         "-Url", $streamUri.AbsoluteUri,
         "-OutputFileBase64", $encodedMetadataFile,
         "-DelaySeconds", $BufferDelaySeconds

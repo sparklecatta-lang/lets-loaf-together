@@ -242,7 +242,7 @@ func _ready() -> void:
 		_run_audius_smoke.call_deferred()
 	if OS.is_debug_build() and "--qa-audius" in OS.get_cmdline_user_args():
 		_run_random_chillhop_smoke.call_deferred()
-	if OS.is_debug_build() and "--qa-radio-controls" in OS.get_cmdline_user_args():
+	if "--qa-radio-controls" in OS.get_cmdline_user_args():
 		_run_radio_controls_smoke.call_deferred()
 	if OS.is_debug_build() and "--qa-xsxb-loop" in OS.get_cmdline_user_args():
 		_run_xsxb_loop_smoke.call_deferred()
@@ -2840,10 +2840,21 @@ func _run_random_chillhop_smoke() -> void:
 	get_tree().quit(0 if ok else 1)
 
 
+func _radio_control_ack_matches(path: String, process_id: int, volume: float, paused: bool) -> bool:
+	if not FileAccess.file_exists(path):
+		return false
+	var parts := FileAccess.get_file_as_string(path).strip_edges().split("|")
+	return parts.size() == 3 \
+		and parts[0].to_int() == process_id \
+		and is_equal_approx(parts[1].to_float(), volume) \
+		and parts[2].to_int() == int(paused)
+
+
 func _run_radio_controls_smoke() -> void:
 	var pid_path := "user://watercolor_desk_radio.pid"
 	var volume_path := "user://watercolor_desk_radio_volume.txt"
 	var pause_path := "user://watercolor_desk_radio_pause.txt"
+	var ack_path := "user://watercolor_desk_radio_control_ack.txt"
 	music_panel.manager.set_volume(0.0, false)
 	var start_usec := Time.get_ticks_usec()
 	var started := music_panel.manager.play_station(0)
@@ -2859,20 +2870,35 @@ func _run_radio_controls_smoke() -> void:
 
 	var volume_usec := Time.get_ticks_usec()
 	for index in range(60):
-		music_panel.manager.set_volume(float(index) / 100.0, false)
-	music_panel.manager.set_volume(0.0, false)
+		music_panel.music_volume_slider.value = float(index) / 100.0
+	music_panel.music_volume_slider.value = 0.0
 	await get_tree().process_frame
 	var volume_frame_ms := float(Time.get_ticks_usec() - volume_usec) / 1000.0
-	await get_tree().create_timer(0.2).timeout
+	var volume_acknowledged := false
+	for attempt in range(100):
+		await get_tree().create_timer(0.1).timeout
+		if _radio_control_ack_matches(ack_path, original_pid, 0.0, false):
+			volume_acknowledged = true
+			break
 	var volume_pid := FileAccess.get_file_as_string(pid_path).strip_edges().to_int()
 	var applied_volume := FileAccess.get_file_as_string(volume_path).strip_edges().to_float()
 
-	music_panel.manager.toggle_pause()
-	await get_tree().create_timer(0.2).timeout
+	music_panel.play_button.pressed.emit()
+	var pause_acknowledged := false
+	for attempt in range(50):
+		await get_tree().create_timer(0.1).timeout
+		if _radio_control_ack_matches(ack_path, original_pid, 0.0, true):
+			pause_acknowledged = true
+			break
 	var paused_pid := FileAccess.get_file_as_string(pid_path).strip_edges().to_int()
 	var pause_requested := FileAccess.get_file_as_string(pause_path).strip_edges() == "1"
-	music_panel.manager.toggle_pause()
-	await get_tree().create_timer(0.2).timeout
+	music_panel.play_button.pressed.emit()
+	var resume_acknowledged := false
+	for attempt in range(50):
+		await get_tree().create_timer(0.1).timeout
+		if _radio_control_ack_matches(ack_path, original_pid, 0.0, false):
+			resume_acknowledged = true
+			break
 	var resumed_pid := FileAccess.get_file_as_string(pid_path).strip_edges().to_int()
 	var resume_requested := FileAccess.get_file_as_string(pause_path).strip_edges() == "0"
 
@@ -2893,8 +2919,9 @@ func _run_radio_controls_smoke() -> void:
 	var responsive := start_frame_ms < 100.0 and volume_frame_ms < 100.0 and switch_frame_ms < 100.0
 	var switch_connected_new_track := switched and switched_pid > 0 and switched_pid != original_pid
 	var ok := started and controls_same_process and is_zero_approx(applied_volume) \
-		and pause_requested and resume_requested and responsive and switch_connected_new_track
-	print("RADIO_CONTROLS_SMOKE original_pid=%d volume_pid=%d paused_pid=%d resumed_pid=%d switched_pid=%d start_ms=%.3f volume_ms=%.3f switch_ms=%.3f same_process=%s pause=%s resume=%s ok=%s" % [
+		and volume_acknowledged and pause_requested and pause_acknowledged \
+		and resume_requested and resume_acknowledged and responsive and switch_connected_new_track
+	print("RADIO_CONTROLS_SMOKE original_pid=%d volume_pid=%d paused_pid=%d resumed_pid=%d switched_pid=%d start_ms=%.3f volume_ms=%.3f switch_ms=%.3f same_process=%s volume_ack=%s pause=%s pause_ack=%s resume=%s resume_ack=%s ok=%s" % [
 		original_pid,
 		volume_pid,
 		paused_pid,
@@ -2904,8 +2931,11 @@ func _run_radio_controls_smoke() -> void:
 		volume_frame_ms,
 		switch_frame_ms,
 		controls_same_process,
+		volume_acknowledged,
 		pause_requested,
+		pause_acknowledged,
 		resume_requested,
+		resume_acknowledged,
 		ok,
 	])
 	music_panel.manager.stop()

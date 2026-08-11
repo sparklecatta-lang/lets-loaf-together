@@ -26,14 +26,14 @@
 
 | 平台 | 下载 | 大小 |
 | --- | --- | ---: |
-| Windows | [百度网盘](https://pan.baidu.com/s/1ewj1kPKC7ISZgI250doE0Q?pwd=rytj) · 提取码 `rytj` | 230.87 MiB |
+| Windows | 修复版上传中（旧链接已撤下） | 231.02 MiB |
 | macOS | [百度网盘](https://pan.baidu.com/s/1TcmWLXqB-iCwHwgcuaYwiw?pwd=pi2g) · 提取码 `pi2g` | 243.55 MiB |
 
 <details>
 <summary>查看文件 SHA-256 校验值</summary>
 
 ```text
-Windows  6f5c86ceb90da8fd89ccdeefc1065460c142e12a575e2f4fbc656758e79f6cb0
+Windows  cfbb53558da5c46b851a7c776460ef83cd6b8b014f43a516f7a53c508deb42bb
 macOS    0d488146c084aa96dd18f37c1b2428782f7e372bb8fcf44af950fc4e76077f64
 ```
 
@@ -113,6 +113,9 @@ Windows 解压后双击 `LetsLoafTogether.exe`。macOS 解压后打开“一起�
 
 # 生成 Windows 与 macOS 完整包
 & '.\tools\package_full_releases.ps1'
+
+# 只重做 Windows，保留现有 macOS 包与校验值
+& '.\tools\package_full_releases.ps1' -WindowsOnly
 ```
 
 默认输出到同级目录 `watercolor-desk-companion-deliverables`，每个压缩包旁边都会生成独立的 `.sha256` 校验文件。

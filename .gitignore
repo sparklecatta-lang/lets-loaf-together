@@ -26,6 +26,7 @@
 /xsxb_frame_tuner/attack_trails/presets/*.png*
 
 # Local editor and temporary files
+/docs/screenshots/*.import
 __pycache__/
 *.py[cod]
 *.tmp

@@ -4,25 +4,32 @@ param(
     [string]$GodotConsoleExe = "E:\jiuming-huanchao\Godot_v4.7-stable_win64\Godot_v4.7-stable_win64_console.exe",
     [string]$WindowsFfplayExe = "I:\FF\bin\ffplay.exe",
     [string]$FfmpegLicensePath = "I:\FF\ffmpeg-master-latest-win64-gpl\LICENSE.txt",
+    [switch]$WindowsOnly,
     [switch]$Force
 )
 
 $ErrorActionPreference = "Stop"
 Add-Type -AssemblyName Microsoft.VisualBasic
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot ".."))
+$windowsIconEmbedder = Join-Path $projectRoot "tools\embed_windows_icon.py"
+$windowsIcon = Join-Path $projectRoot "assets\branding\cat_food_mascot\app_icon.ico"
 if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
     $OutputDirectory = Join-Path (Split-Path $projectRoot -Parent) "watercolor-desk-companion-deliverables"
 }
 $outputRoot = [IO.Path]::GetFullPath($OutputDirectory)
 $windowsArchive = Join-Path $outputRoot "LetsLoafTogether-Windows.zip"
 $macosArchive = Join-Path $outputRoot "LetsLoafTogether-macOS.zip"
+$requestedArchives = @($windowsArchive)
+if (-not $WindowsOnly) {
+    $requestedArchives += $macosArchive
+}
 
-foreach ($requiredFile in @($GodotConsoleExe, $WindowsFfplayExe, $FfmpegLicensePath)) {
+foreach ($requiredFile in @($GodotConsoleExe, $WindowsFfplayExe, $FfmpegLicensePath, $windowsIconEmbedder, $windowsIcon)) {
     if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
         throw "Required packaging file is missing: $requiredFile"
     }
 }
-foreach ($target in @($windowsArchive, $macosArchive)) {
+foreach ($target in $requestedArchives) {
     if ((Test-Path -LiteralPath $target -PathType Leaf) -and -not $Force) {
         throw "Release archive already exists: $target. Use -Force to replace it."
     }
@@ -124,6 +131,12 @@ try {
     New-Item -ItemType Directory -Path $windowsRoot | Out-Null
     $windowsExe = Join-Path $windowsRoot "LetsLoafTogether.exe"
     Invoke-GodotExport -Preset "Windows Portable" -Target $windowsExe
+    $iconEmbeddedExe = Join-Path $stagingRoot "LetsLoafTogether-icon.exe"
+    & python $windowsIconEmbedder --input-exe $windowsExe --icon $windowsIcon --output-exe $iconEmbeddedExe
+    if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $iconEmbeddedExe -PathType Leaf)) {
+        throw "Failed to embed the Windows application icon."
+    }
+    Copy-Item -LiteralPath $iconEmbeddedExe -Destination $windowsExe -Force
     $windowsPck = [IO.Path]::ChangeExtension($windowsExe, ".pck")
     if (-not (Test-Path -LiteralPath $windowsPck -PathType Leaf)) {
         throw "Windows export is missing its PCK: $windowsPck"
@@ -154,6 +167,7 @@ try {
         $false
     )
 
+    if (-not $WindowsOnly) {
     $macosBase = Join-Path $stagingRoot "macos-base.zip"
     Invoke-GodotExport -Preset "macOS Portable" -Target $macosBase
     $armArchivePath = Join-Path $stagingRoot "ffplay-macos-arm64.zip"
@@ -211,8 +225,9 @@ Online music uses the bundled FFplay child process. Pausing or changing volume r
         $intelZip.Dispose()
         $armZip.Dispose()
     }
+    }
 
-    $results = foreach ($archive in @($windowsArchive, $macosArchive)) {
+    $results = foreach ($archive in $requestedArchives) {
         $hash = (Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash.ToLowerInvariant()
         "$hash  $([IO.Path]::GetFileName($archive))" |
             Set-Content -LiteralPath ($archive + ".sha256") -Encoding ASCII
