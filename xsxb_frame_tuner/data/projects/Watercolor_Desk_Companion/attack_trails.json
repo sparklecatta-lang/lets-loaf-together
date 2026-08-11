@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 21,
+  "presetTexture": {
+    "path": "res://xsxb_frame_tuner/attack_trails/presets/af5fffcb5009c5eb78bc595d85f72f0bd68e310d5f7926e54512d4f39efb1878.png",
+    "assetHash": "af5fffcb5009c5eb78bc595d85f72f0bd68e310d5f7926e54512d4f39efb1878",
+    "name": "coherent_trail_body_luma.png",
+    "type": "image/png",
+    "width": 256,
+    "height": 256,
+    "hasEffectiveAlpha": false
+  },
+  "presets": [],
+  "bindings": {}
+}

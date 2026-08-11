@@ -1,0 +1,23 @@
+{
+  "version": 3,
+  "source": "Rain Music Radio",
+  "note": "Continuous online radio stream. No music files are bundled or offered for download.",
+  "stations": [
+    {
+      "id": "rain_music_radio",
+      "title": "Rain Music Radio",
+      "artist": "Chillhop · Lo-fi · Jazzhop",
+      "description": "以 Chillhop 为主，混合 Lo-fi Hip Hop 与 Jazz 的连续电台。",
+      "provider": "Rain Music Radio / Greek Pirate Party",
+      "source": "rain_music_radio",
+      "stream_url": "https://thanasis.radioca.st/",
+      "buffer_delay_seconds": 20,
+      "homepage": "https://rain-radio.com/",
+      "source_url": "https://rain-radio.com/",
+      "license_name": "Creative Commons; original music by the station",
+      "license_url": "https://rain-radio.com/",
+      "enabled": true,
+      "release_enabled": true
+    }
+  ]
+}

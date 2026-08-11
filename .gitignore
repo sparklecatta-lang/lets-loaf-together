@@ -1,0 +1,33 @@
+# Godot-generated data and local QA output
+/.godot/
+/qa/
+/output/
+/_codex_backups/
+
+# Working art and generated source material
+/art/
+/assets/source/
+/assets/concepts/
+/assets/layers/
+/assets/branding/*
+!/assets/branding/cat_food_mascot/
+/assets/branding/cat_food_mascot/*
+!/assets/branding/cat_food_mascot/app_icon.ico
+!/assets/branding/cat_food_mascot/app_icon_256.png
+!/assets/branding/cat_food_mascot/app_icon_256.png.import
+
+# Runtime artwork and local audio are distributed outside GitHub
+/assets/backgrounds/
+/assets/props/
+/assets/audio/
+/xsxb_frame_tuner/workspace/projects/Watercolor_Desk_Companion/assets/
+/xsxb_frame_tuner/audio/projects/Watercolor_Desk_Companion/
+/xsxb_frame_tuner/attachments/projects/Watercolor_Desk_Companion/
+/xsxb_frame_tuner/attack_trails/presets/*.png*
+
+# Local editor and temporary files
+__pycache__/
+*.py[cod]
+*.tmp
+*.log
+*.truncated

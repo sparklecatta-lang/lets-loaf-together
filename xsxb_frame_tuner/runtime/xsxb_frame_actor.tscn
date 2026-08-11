@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://xsxb_frame_tuner/runtime/xsxb_frame_actor.gd" id="1_script"]
+[ext_resource type="Script" path="res://xsxb_frame_tuner/runtime/xsxb_attack_trail_renderer.gd" id="2_trail"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(40, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurtbox"]
+size = Vector2(44, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
+size = Vector2(80, 40)
+
+[node name="XSXBFrameActor" type="CharacterBody2D"]
+script = ExtResource("1_script")
+frame_project_id = "Watercolor_Desk_Companion"
+frame_profile_id = "desk_girl"
+frame_animation = "typing"
+
+[node name="AttackTrailsBehind" type="Node2D" parent="."]
+script = ExtResource("2_trail")
+
+[node name="VisualOwner" type="Node2D" parent="."]
+
+[node name="AttachmentsBelow" type="Node2D" parent="VisualOwner"]
+
+[node name="FrameSprite" type="Sprite2D" parent="VisualOwner"]
+
+[node name="AttachmentsAbove" type="Node2D" parent="VisualOwner"]
+
+[node name="AttackTrailsFront" type="Node2D" parent="."]
+script = ExtResource("2_trail")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_body")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+monitoring = false
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_hurtbox")
+
+[node name="Hitbox" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_hitbox")
+disabled = true
+
+[node name="FrameAudioPlayer" type="AudioStreamPlayer" parent="."]

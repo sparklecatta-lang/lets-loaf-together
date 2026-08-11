@@ -1,0 +1,27 @@
+{
+  "format_version": 1,
+  "product": "Let's Loaf Together",
+  "chinese_name": "一起磨洋工",
+  "download_url": "https://drive.google.com/file/d/14hr-PRQ4gTomjQCN2RJvOxr4cmrr5voU/view?usp=sharing",
+  "download_mirrors": [
+    {
+      "name": "Google Drive",
+      "url": "https://drive.google.com/file/d/14hr-PRQ4gTomjQCN2RJvOxr4cmrr5voU/view?usp=sharing"
+    },
+    {
+      "name": "百度网盘",
+      "url": "https://pan.baidu.com/s/1ayXlGbPS89eKCPRi9rRdvw?pwd=qdf6",
+      "access_code": "qdf6"
+    }
+  ],
+  "archive_name": "LetsLoafTogether-ArtAudio.zip",
+  "sha256": "53f05bad9a8557bddcc4c79254e0d543ff7f0eaf30b0202a74b47ba61666c5a6",
+  "install_root": ".",
+  "required_files": [
+    "assets/backgrounds/yellow_cat_window_room/cream_table_room_20260810/室内背景_奶白桌面适配_窗洞透明.png",
+    "assets/audio/weather/user_gentle_rain.mp3",
+    "assets/props/floor/cat_food_bag/黄猫猫粮袋_透明.png",
+    "xsxb_frame_tuner/workspace/projects/Watercolor_Desk_Companion/assets/desk_girl/typing/frame_0001.png",
+    "xsxb_frame_tuner/workspace/projects/Watercolor_Desk_Companion/assets/yellow_cat/sleep/frame_0001.png"
+  ]
+}

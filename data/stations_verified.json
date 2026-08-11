@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "purpose": "Fixed development-only station allowlist. This is not a user-search catalog.",
+  "last_probe_at": "2026-08-10T09:28:00+08:00",
+  "probe_tools": [
+    "I:/FF/bin/ffprobe.exe",
+    "I:/FF/bin/ffplay.exe"
+  ],
+  "stations": [
+    {
+      "id": "rain_music_radio",
+      "title": "Rain Music Radio",
+      "provider": "Rain Music Radio / Greek Pirate Party",
+      "stream_url": "https://thanasis.radioca.st/",
+      "homepage": "https://rain-radio.com/",
+      "terms_url": "https://rain-radio.com/",
+      "prototype_enabled": true,
+      "release_enabled": true,
+      "probe": {
+        "result": "connected",
+        "method": "read-only ffprobe packet probe plus muted ffplay decode probe with 20-second delay buffer",
+        "ffplay_result": "continuous live audio process remained alive for more than 50 seconds",
+        "codec": "mp3",
+        "sample_rate_hz": 44100,
+        "channels": 2,
+        "bitrate_kbps": 128,
+        "icy_metadata": "Lofi Dog 2 - Lofi Jazz Project"
+      },
+      "rights_review": {
+        "status": "approved_for_free_online_client",
+        "homepage_evidence": "The official page describes lofi, chillhop, hiphop and jazz; says all music is original, calls the stream a free Creative Commons compilation, and explicitly says Listen, Use, Share.",
+        "boundary": "The game connects users directly to the original station stream and does not record, proxy, download or bundle the music. Reconfirm before paid or advertising-supported distribution because the exact Creative Commons version is not stated."
+      }
+    },
+    {
+      "id": "ilove_chillhop",
+      "title": "咖啡馆 Chillhop",
+      "provider": "I LOVE MUSIC",
+      "stream_url": "https://play.ilovemusic.de/ilm_ilovechillhop/",
+      "homepage": "https://ilovemusic.de/streams/",
+      "terms_url": "",
+      "prototype_enabled": true,
+      "release_enabled": false,
+      "probe": {
+        "result": "connected",
+        "method": "read-only ffprobe packet probe plus muted ffplay decode probe",
+        "ffplay_result": "decoded live audio frames",
+        "codec": "mp3",
+        "sample_rate_hz": 44100,
+        "channels": 2,
+        "bitrate_kbps": 192
+      },
+      "rights_review": {
+        "status": "pending_written_permission",
+        "homepage_evidence": "The official streams page publishes MP3 endpoints and invites listening through external players, speakers, TVs, consoles, Discord and TeamSpeak bots.",
+        "open_question": "Obtain written confirmation that bundling this fixed stream in a distributable desktop companion app is permitted, including commercial distribution if applicable."
+      }
+    },
+    {
+      "id": "laut_fm_lofi",
+      "title": "深夜 Lofi（开发试听）",
+      "provider": "laut.fm / station lofi",
+      "stream_url": "https://stream.laut.fm/lofi",
+      "homepage": "https://laut.fm/lofi",
+      "terms_url": "https://laut.fm/pages/terms_and_conditions",
+      "prototype_enabled": true,
+      "release_enabled": false,
+      "probe": {
+        "result": "connected",
+        "method": "read-only ffprobe packet probe plus muted ffplay decode probe",
+        "ffplay_result": "decoded live audio frames",
+        "codec": "mp3",
+        "sample_rate_hz": 44100,
+        "channels": 2,
+        "bitrate_kbps": 128
+      },
+      "rights_review": {
+        "status": "known_restriction_do_not_ship",
+        "homepage_evidence": "The station page publishes MP3, M3U and PLS listening links.",
+        "restriction": "laut.fm terms section 6(2) limits use to private purposes and section 6(9) forbids embedding provider audio streams on third-party websites. Treat desktop-app distribution as unapproved unless laut.fm grants written permission."
+      }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="一起磨洋工"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="Godot/app_userdata/Watercolor Desk Companion"
+run/main_scene="res://scenes/main.tscn"
+config/icon="res://assets/branding/cat_food_mascot/app_icon_256.png"
+config/windows_native_icon="res://assets/branding/cat_food_mascot/app_icon.ico"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+
+[display]
+
+window/size/viewport_width=1112
+window/size/viewport_height=834
+window/size/borderless=true
+window/size/window_width_override=1112
+window/size/window_height_override=834
+window/stretch/mode="disabled"
+window/per_pixel_transparency/allowed=true
+window/per_pixel_transparency/enabled=true
+window/initial_position_type=2
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0, 0, 0, 0)

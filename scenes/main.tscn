@@ -1,0 +1,427 @@
+[gd_scene load_steps=38 format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/window_controller.gd" id="2_window"]
+[ext_resource type="Theme" path="res://themes/companion_theme.tres" id="3_theme"]
+[ext_resource type="PackedScene" path="res://xsxb_frame_tuner/runtime/xsxb_frame_actor.tscn" id="4_typing_actor"]
+[ext_resource type="PackedScene" path="res://scenes/music_panel.tscn" id="5_music_panel"]
+[ext_resource type="Script" path="res://scripts/radio_bridge.gd" id="6_radio_bridge"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/yellow_cat_window_room/cream_table_room_20260810/室内背景_奶白桌面适配_窗洞透明.png" id="7_window_background"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/yellow_cat_window_room/window_room_foreground.png" id="8_window_occluders"]
+[ext_resource type="Shader" path="res://shaders/soft_rounded_canvas.gdshader" id="9_soft_edge"]
+[ext_resource type="PackedScene" path="res://scenes/action_preview_window.tscn" id="10_action_preview"]
+[ext_resource type="Texture2D" path="res://assets/props/game_figurines/huanchao_martial_cat/武术猫手办_原比例无高光_桌面尺寸.png" id="11_martial_cat_figurine"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/yellow_cat_window_room/cream_table_room_20260810/外景层A_楼间庭院_奶白重绘窗洞.png" id="12_window_exterior"]
+[ext_resource type="VideoStream" path="res://assets/backgrounds/yellow_cat_window_room/cream_table_room_20260810/video/夜晚小区循环动画_窗洞裁切.ogv" id="13_window_exterior_video"]
+[ext_resource type="Texture2D" path="res://assets/props/desk_plants/multicolor_chinese_rose/多色月季盆栽_自然错落_桌面尺寸.png" id="14_multicolor_rose_pot"]
+[ext_resource type="Shader" path="res://shaders/room_wall_depth.gdshader" id="15_wall_depth"]
+[ext_resource type="Shader" path="res://shaders/exterior_saturation.gdshader" id="16_exterior_saturation"]
+[ext_resource type="Shader" path="res://shaders/plant_vertical_split.gdshader" id="17_plant_split"]
+[ext_resource type="Shader" path="res://shaders/night_blue_light_mask.gdshader" id="18_night_blue_mask"]
+[ext_resource type="Shader" path="res://shaders/directional_light_interaction.gdshader" id="19_directional_light"]
+[ext_resource type="Shader" path="res://shaders/window_rain.gdshader" id="20_window_rain"]
+[ext_resource type="AudioStream" path="res://assets/audio/weather/user_gentle_rain.mp3" id="21_rain_loop"]
+[ext_resource type="AudioStream" path="res://assets/audio/weather/user_thunder.mp3" id="22_thunder_close"]
+[ext_resource type="Texture2D" path="res://assets/props/shelf_plants/trailing_pothos/垂吊绿萝_书架尺寸.png" id="25_trailing_pothos"]
+[ext_resource type="Texture2D" path="res://assets/props/floor/cat_food_bag/黄猫猫粮袋_透明.png" id="26_cat_food_bag"]
+[ext_resource type="Shader" path="res://shaders/interior_floor_prop_grade.gdshader" id="27_floor_prop_grade"]
+[ext_resource type="Texture2D" path="res://assets/props/floor/elevated_cat_bowl/垫高猫粮碗_透明.png" id="28_elevated_cat_bowl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_soft_edge"]
+shader = ExtResource("9_soft_edge")
+shader_parameter/night_tint = Vector3(0.62, 0.78, 1.2)
+shader_parameter/night_tint_strength = 0.0
+shader_parameter/night_shadow_strength = 0.0
+shader_parameter/night_exposure = 1.0
+shader_parameter/night_contrast = 1.0
+shader_parameter/warm_highlight_tint = Vector3(1.08, 0.98, 0.82)
+shader_parameter/warm_highlight_strength = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_night_blue_mask"]
+shader = ExtResource("18_night_blue_mask")
+shader_parameter/blue_tint = Vector3(0.22, 0.42, 0.95)
+shader_parameter/blue_amount = 0.76
+shader_parameter/background_light_source = Vector2(0.91, -0.16)
+shader_parameter/background_light_direction = Vector2(-0.38, 1)
+shader_parameter/background_light_half_angle = 0.82
+shader_parameter/background_light_edge = 0.11
+shader_parameter/background_warm_tint = Vector3(1.1, 0.98, 0.86)
+shader_parameter/background_light_reveal = 0.14
+shader_parameter/upper_background_reveal = 0.84
+shader_parameter/platform_shadow_left = 0.14
+shader_parameter/platform_shadow_right = 0.86
+shader_parameter/platform_shadow_top = 0.49
+shader_parameter/platform_shadow_depth = 0.3
+shader_parameter/platform_shadow_shift_left = 0.1
+shader_parameter/platform_shadow_strength = 0.54
+shader_parameter/platform_shadow_brightness = 0.72
+shader_parameter/platform_shadow_edge = 0.045
+shader_parameter/window_min = Vector2(0.21, 0)
+shader_parameter/window_max = Vector2(0.84, 0.43)
+shader_parameter/window_feather = 0.008
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_directional_light"]
+shader = ExtResource("19_directional_light")
+shader_parameter/main_source = Vector2(0.91, -0.16)
+shader_parameter/main_direction = Vector2(-0.38, 1)
+shader_parameter/main_half_angle = 0.82
+shader_parameter/main_edge_softness = 0.09
+shader_parameter/main_warm_tint = Vector3(1.1, 0.98, 0.86)
+shader_parameter/main_warm_influence = 0.1
+shader_parameter/main_occlusion_strength = 0.12
+shader_parameter/shadow_blue_tint = Vector3(0.36, 0.68, 1.28)
+shader_parameter/monitor_screen_x = 0.79
+shader_parameter/monitor_near_top = 0.14
+shader_parameter/monitor_near_bottom = 0.56
+shader_parameter/monitor_far_x = 0.17
+shader_parameter/monitor_far_top = 0.0
+shader_parameter/monitor_far_bottom = 0.78
+shader_parameter/monitor_white_influence = 0.5
+shader_parameter/brush_variation = 0.03
+shader_parameter/window_min = Vector2(0.21, 0)
+shader_parameter/window_max = Vector2(0.84, 0.43)
+shader_parameter/window_feather = 0.008
+shader_parameter/lower_shadow_blue_tint = Vector3(0.34, 0.55, 1.16)
+shader_parameter/lower_shadow_strength = 0.5
+shader_parameter/lower_shadow_brightness = 0.62
+shader_parameter/lower_shadow_start_left = 0.58
+shader_parameter/lower_shadow_start_right = 0.71
+shader_parameter/lower_shadow_end = 0.96
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wall_depth"]
+shader = ExtResource("15_wall_depth")
+shader_parameter/wall_darkening = 0.065
+shader_parameter/wall_top = 0.41
+shader_parameter/wall_bottom = 0.84
+shader_parameter/vertical_feather = 0.035
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_exterior_saturation"]
+shader = ExtResource("16_exterior_saturation")
+shader_parameter/saturation = 1.28
+shader_parameter/night_tint = Vector3(0.52, 0.74, 1.18)
+shader_parameter/night_tint_strength = 0.46
+shader_parameter/building_darkening = 0.3
+shader_parameter/window_gain = 1.34
+shader_parameter/window_glow = 0.16
+shader_parameter/window_glow_color = Vector3(1, 0.5, 0.16)
+shader_parameter/tree_visibility = 0.3
+shader_parameter/tree_saturation = 1.24
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rose_base"]
+shader = ExtResource("17_plant_split")
+shader_parameter/show_upper = false
+shader_parameter/split_y = 0.69
+shader_parameter/feather = 0.018
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rose_flowers"]
+shader = ExtResource("17_plant_split")
+shader_parameter/show_upper = true
+shader_parameter/split_y = 0.69
+shader_parameter/feather = 0.018
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_window_rain"]
+shader = ExtResource("20_window_rain")
+shader_parameter/intensity = 0.0
+shader_parameter/rain_color = Color(0.72, 0.86, 1, 1)
+shader_parameter/wind = 0.16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_floor_props"]
+shader = ExtResource("27_floor_prop_grade")
+shader_parameter/saturation = 0.72
+shader_parameter/exposure = 0.84
+shader_parameter/night_tint = Vector3(0.86, 0.94, 1.04)
+shader_parameter/contrast = 0.92
+
+[sub_resource type="Gradient" id="Gradient_room_key_light"]
+offsets = PackedFloat32Array(0, 0.45, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.42, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_room_key_light"]
+gradient = SubResource("Gradient_room_key_light")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_main")
+
+[node name="WindowController" type="Node" parent="."]
+script = ExtResource("2_window")
+
+[node name="RadioBridge" type="Node" parent="."]
+script = ExtResource("6_radio_bridge")
+
+[node name="ActionPreviewWindow" parent="." instance=ExtResource("10_action_preview")]
+
+[node name="RainAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("21_rain_loop")
+volume_db = -80.0
+
+[node name="ThunderAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("22_thunder_close")
+volume_db = -8.0
+
+[node name="VisualViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1112, 834)
+render_target_update_mode = 4
+
+[node name="NightAmbient" type="CanvasModulate" parent="VisualViewport"]
+unique_name_in_owner = true
+color = Color(1, 1, 1, 1)
+
+[node name="CharacterLayer" type="Node2D" parent="VisualViewport"]
+
+[node name="RoomKeyLight" type="PointLight2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2(820, -50)
+color = Color(1, 0.78, 0.58, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_room_key_light")
+texture_scale = 4.0
+
+[node name="MonitorGlow" type="PointLight2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2(875, 290)
+color = Color(0.45, 0.76, 1, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_room_key_light")
+texture_scale = 1.2
+
+[node name="DeskWarmBounce" type="PointLight2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2(700, 500)
+color = Color(1, 0.62, 0.32, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_room_key_light")
+texture_scale = 1.15
+
+[node name="WindowExteriorBackground" type="Sprite2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2(556, 417)
+z_index = -4
+light_mask = 2
+material = SubResource("ShaderMaterial_exterior_saturation")
+texture = ExtResource("12_window_exterior")
+
+[node name="WindowExteriorVideo" type="VideoStreamPlayer" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+offset_left = 244.0
+offset_right = 930.0
+offset_bottom = 303.0
+mouse_filter = 2
+z_index = -3
+light_mask = 2
+material = SubResource("ShaderMaterial_exterior_saturation")
+stream = ExtResource("13_window_exterior_video")
+autoplay = true
+expand = true
+loop = true
+volume_db = -80.0
+
+[node name="WindowRain" type="ColorRect" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+offset_left = 244.0
+offset_right = 930.0
+offset_bottom = 303.0
+mouse_filter = 2
+z_index = -3
+material = SubResource("ShaderMaterial_window_rain")
+color = Color(1, 1, 1, 1)
+
+[node name="WindowLightningFlash" type="ColorRect" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+offset_left = 244.0
+offset_right = 930.0
+offset_bottom = 303.0
+mouse_filter = 2
+z_index = -3
+color = Color(0.72, 0.84, 1, 0)
+
+[node name="WindowRoomBackground" type="Sprite2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2(556, 417)
+z_index = -2
+material = SubResource("ShaderMaterial_wall_depth")
+texture = ExtResource("7_window_background")
+
+[node name="TrailingPothos" type="Sprite2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2(112, 59)
+z_index = 0
+texture = ExtResource("25_trailing_pothos")
+
+[node name="YellowCat" parent="VisualViewport/CharacterLayer" instance=ExtResource("4_typing_actor")]
+unique_name_in_owner = true
+position = Vector2(556, 834)
+z_index = 0
+collision_layer = 0
+collision_mask = 0
+frame_profile_id = "yellow_cat"
+frame_animation = "sleep"
+loop_animation = true
+use_frame_boxes = false
+
+[node name="MartialCatFigurine" type="Sprite2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2(260, 343)
+texture = ExtResource("11_martial_cat_figurine")
+
+[node name="CatFoodBagShadow" type="Line2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+z_index = 0
+points = PackedVector2Array(883.5, 769, 903.5, 782)
+width = 2.5
+default_color = Color(0, 0, 0, 0.3)
+antialiased = true
+
+[node name="CatFoodBagRearContactShadow" type="Line2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+z_index = 0
+points = PackedVector2Array(903.5, 782, 985, 774)
+width = 2.5
+default_color = Color(0, 0, 0, 0.3)
+antialiased = true
+
+[node name="CatFoodBag" type="Sprite2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2(936, 698)
+z_index = 0
+scale = Vector2(0.14, 0.14)
+material = SubResource("ShaderMaterial_floor_props")
+texture = ExtResource("26_cat_food_bag")
+
+[node name="CatBowlShadow" type="Polygon2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2(790, 786)
+z_index = 0
+polygon = PackedVector2Array(-5, 0, 5, 0, 4, 2, -4, 2)
+color = Color(0, 0, 0, 0.3)
+
+[node name="CatBowlLeftFootShadow" type="Polygon2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2(753.5, 770)
+z_index = 0
+polygon = PackedVector2Array(-4, 0, 4, 0, 3, 2, -3, 2)
+color = Color(0, 0, 0, 0.28)
+
+[node name="CatBowlRightFootShadow" type="Polygon2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2(826.5, 770)
+z_index = 0
+polygon = PackedVector2Array(-4, 0, 4, 0, 3, 2, -3, 2)
+color = Color(0, 0, 0, 0.28)
+
+[node name="ElevatedCatBowl" type="Sprite2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2(790, 749)
+z_index = 0
+scale = Vector2(0.085, 0.085)
+material = SubResource("ShaderMaterial_floor_props")
+texture = ExtResource("28_elevated_cat_bowl")
+
+[node name="WindowRoomForeground" type="Sprite2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2(556, 417)
+z_index = 1
+texture = ExtResource("8_window_occluders")
+
+[node name="TypingGirl" parent="VisualViewport/CharacterLayer" instance=ExtResource("4_typing_actor")]
+unique_name_in_owner = true
+position = Vector2(556, 834)
+z_index = 1
+collision_layer = 0
+collision_mask = 0
+loop_animation = true
+
+[node name="RosePotShadow" type="Sprite2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2(997, 560)
+z_index = 2
+scale = Vector2(0.27, 0.035)
+self_modulate = Color(0.1, 0.15, 0.23, 0.25)
+texture = SubResource("GradientTexture2D_room_key_light")
+
+[node name="MulticolorRosePotBase" type="Sprite2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2(1014, 435)
+z_index = 3
+material = SubResource("ShaderMaterial_rose_base")
+texture = ExtResource("14_multicolor_rose_pot")
+
+[node name="RoseFlowersPivot" type="Node2D" parent="VisualViewport/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2(1014, 486)
+z_index = 3
+
+[node name="RoseFlowers" type="Sprite2D" parent="VisualViewport/CharacterLayer/RoseFlowersPivot"]
+unique_name_in_owner = true
+position = Vector2(0, -51)
+material = SubResource("ShaderMaterial_rose_flowers")
+texture = ExtResource("14_multicolor_rose_pot")
+
+[node name="NightBlueOverlay" type="ColorRect" parent="VisualViewport"]
+unique_name_in_owner = true
+z_index = -1
+offset_right = 1112.0
+offset_bottom = 834.0
+mouse_filter = 2
+material = SubResource("ShaderMaterial_night_blue_mask")
+color = Color(1, 1, 1, 1)
+
+[node name="DirectionalLightBackBuffer" type="BackBufferCopy" parent="VisualViewport"]
+z_index = 19
+copy_mode = 2
+
+[node name="DirectionalLightOverlay" type="ColorRect" parent="VisualViewport"]
+unique_name_in_owner = true
+z_index = 20
+offset_right = 1112.0
+offset_bottom = 834.0
+mouse_filter = 2
+material = SubResource("ShaderMaterial_directional_light")
+color = Color(1, 1, 1, 1)
+
+[node name="RoomLightningFlash" type="ColorRect" parent="VisualViewport"]
+unique_name_in_owner = true
+z_index = 21
+offset_right = 1112.0
+offset_bottom = 834.0
+mouse_filter = 2
+color = Color(0.67, 0.78, 1, 0)
+
+[node name="VisualOutput" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_soft_edge")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="MusicPanel" parent="UILayer" instance=ExtResource("5_music_panel")]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -240.0
+offset_top = 18.0
+offset_right = -18.0
+offset_bottom = 196.0
+grow_horizontal = 0

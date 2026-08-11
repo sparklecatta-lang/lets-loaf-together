@@ -1,0 +1,692 @@
+{
+  "schemaVersion": 1,
+  "values": {
+    "profiles.desk_girl.character.visual_size": 1,
+    "profiles.desk_girl.groups.idle.visual_size": 1.0003,
+    "profiles.desk_girl.groups.idle.visual_scale": {
+      "x": 1.0003,
+      "y": 1.0003
+    },
+    "profiles.desk_girl.groups.idle.offset": {
+      "x": 0,
+      "y": 0
+    },
+    "profiles.desk_girl.groups.idle.rotation": 0,
+    "profiles.desk_girl.groups.nail_polish_enter.visual_size": 1,
+    "profiles.desk_girl.groups.nail_polish_enter.visual_scale": {
+      "x": 1,
+      "y": 1
+    },
+    "profiles.desk_girl.groups.nail_polish_enter.offset": {
+      "x": 0,
+      "y": 0
+    },
+    "profiles.desk_girl.groups.nail_polish_enter.rotation": 0,
+    "profiles.desk_girl.groups.nail_polish_loop.visual_size": 1,
+    "profiles.desk_girl.groups.nail_polish_loop.visual_scale": {
+      "x": 1,
+      "y": 1
+    },
+    "profiles.desk_girl.groups.nail_polish_loop.offset": {
+      "x": 0,
+      "y": 0
+    },
+    "profiles.desk_girl.groups.nail_polish_loop.rotation": 0,
+    "profiles.desk_girl.groups.leave.visual_size": 1,
+    "profiles.desk_girl.groups.leave.visual_scale": {
+      "x": 1,
+      "y": 1
+    },
+    "profiles.desk_girl.groups.leave.offset": {
+      "x": 0,
+      "y": 0
+    },
+    "profiles.desk_girl.groups.leave.rotation": 0,
+    "profiles.desk_girl.groups.come_back.visual_size": 1,
+    "profiles.desk_girl.groups.come_back.visual_scale": {
+      "x": 1,
+      "y": 1
+    },
+    "profiles.desk_girl.groups.come_back.offset": {
+      "x": 0,
+      "y": 0
+    },
+    "profiles.desk_girl.groups.come_back.rotation": 0,
+    "profiles.desk_girl.groups.drink_water_bonus.visual_size": 1,
+    "profiles.desk_girl.groups.drink_water_bonus.visual_scale": {
+      "x": 1,
+      "y": 1
+    },
+    "profiles.desk_girl.groups.drink_water_bonus.offset": {
+      "x": 0,
+      "y": 0
+    },
+    "profiles.desk_girl.groups.drink_water_bonus.rotation": 0,
+    "profiles.yellow_cat.character.visual_size": 1,
+    "profiles.yellow_cat.groups.sleep.visual_size": 1,
+    "profiles.yellow_cat.groups.sleep.visual_scale": {
+      "x": 1,
+      "y": 1
+    },
+    "profiles.yellow_cat.groups.sleep.offset": {
+      "x": 0,
+      "y": 0
+    },
+    "profiles.yellow_cat.groups.sleep.rotation": 0,
+    "profiles.yellow_cat.groups.startled.visual_size": 1,
+    "profiles.yellow_cat.groups.startled.visual_scale": {
+      "x": 1,
+      "y": 1
+    },
+    "profiles.yellow_cat.groups.startled.offset": {
+      "x": 0,
+      "y": 0
+    },
+    "profiles.yellow_cat.groups.startled.rotation": 0,
+    "profiles.yellow_cat.groups.mischief.visual_size": 1,
+    "profiles.yellow_cat.groups.mischief.visual_scale": {
+      "x": 1,
+      "y": 1
+    },
+    "profiles.yellow_cat.groups.mischief.offset": {
+      "x": 0,
+      "y": 0
+    },
+    "profiles.yellow_cat.groups.mischief.rotation": 0
+  },
+  "scene_settings": {},
+  "frame_visual_overrides": {},
+  "frame_playback_overrides": {
+    "desk_girl/typing:3": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/typing:4": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/typing:5": {
+      "duration": 3,
+      "disabled": false
+    },
+    "desk_girl/typing:6": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/typing:8": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/typing:9": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/typing:10": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/typing:14": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/startled_recover:2": {
+      "duration": 3,
+      "disabled": false
+    },
+    "desk_girl/startled_recover:3": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/startled_recover:6": {
+      "duration": 4,
+      "disabled": false
+    },
+    "desk_girl/startled_recover:10": {
+      "duration": 4,
+      "disabled": false
+    },
+    "desk_girl/startled_recover:11": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/idle:0": {
+      "duration": 3,
+      "disabled": false
+    },
+    "desk_girl/idle:3": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/idle:4": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/nail_polish_enter:11": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/nail_polish_loop:0": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/nail_polish_loop:3": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/nail_polish_loop:4": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/drink_water:7": {
+      "duration": 1.1538461999999998,
+      "disabled": false
+    },
+    "desk_girl/drink_water:8": {
+      "duration": 1.6153846799999998,
+      "disabled": false
+    },
+    "desk_girl/drink_water:9": {
+      "duration": 1.69230776,
+      "disabled": false
+    },
+    "desk_girl/drink_water:10": {
+      "duration": 1.69230776,
+      "disabled": false
+    },
+    "desk_girl/drink_water:11": {
+      "duration": 1.69230776,
+      "disabled": false
+    },
+    "desk_girl/drink_water:12": {
+      "duration": 2.15384624,
+      "disabled": false
+    },
+    "desk_girl/phone:1": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/phone:12": {
+      "duration": 4,
+      "disabled": false
+    },
+    "desk_girl/phone:13": {
+      "duration": 7,
+      "disabled": false
+    },
+    "desk_girl/phone:14": {
+      "duration": 3,
+      "disabled": false
+    },
+    "desk_girl/stretch:10": {
+      "duration": 4,
+      "disabled": false
+    },
+    "desk_girl/leave:27": {
+      "duration": 0.99999999,
+      "disabled": false
+    },
+    "desk_girl/come_back:0": {
+      "duration": 3.6363636,
+      "disabled": false
+    },
+    "desk_girl/come_back:12": {
+      "duration": 3,
+      "disabled": false
+    },
+    "desk_girl/come_back:44": {
+      "duration": 1,
+      "disabled": true
+    },
+    "desk_girl/use_mouse:9": {
+      "duration": 4,
+      "disabled": false
+    },
+    "desk_girl/use_mouse:10": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/use_mouse:11": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/drink_water_bonus:11": {
+      "duration": 1,
+      "disabled": true
+    },
+    "desk_girl/drink_water_bonus:12": {
+      "duration": 2,
+      "disabled": false
+    },
+    "desk_girl/drink_water_bonus:17": {
+      "duration": 1.5263158199999998,
+      "disabled": false
+    },
+    "desk_girl/drink_water_bonus:18": {
+      "duration": 2.84210532,
+      "disabled": false
+    },
+    "desk_girl/drink_water_bonus:19": {
+      "duration": 1,
+      "disabled": true
+    },
+    "desk_girl/drink_water_bonus:20": {
+      "duration": 1.36842108,
+      "disabled": false
+    },
+    "yellow_cat/sleep:__group": {
+      "fps": 4.696410600469641
+    },
+    "yellow_cat/sleep:9": {
+      "duration": 2,
+      "disabled": false
+    },
+    "yellow_cat/startled:0": {
+      "duration": 2,
+      "disabled": false
+    },
+    "yellow_cat/startled:4": {
+      "duration": 3,
+      "disabled": false
+    },
+    "yellow_cat/startled:9": {
+      "duration": 2,
+      "disabled": false
+    },
+    "yellow_cat/startled:13": {
+      "duration": 2,
+      "disabled": false
+    }
+  },
+  "frame_box_overrides": {
+    "desk_girl/typing:0": {
+      "hurtbox": {
+        "offset": {
+          "x": -206,
+          "y": -389
+        },
+        "size": {
+          "x": 400,
+          "y": 770
+        },
+        "rotation": 0,
+        "enabled": true
+      },
+      "collisionbox": {
+        "offset": {
+          "x": -206,
+          "y": -140
+        },
+        "size": {
+          "x": 220,
+          "y": 280
+        },
+        "rotation": 0,
+        "enabled": true
+      }
+    },
+    "desk_girl/typing:1": {
+      "hurtbox": {
+        "offset": {
+          "x": -206,
+          "y": -389
+        },
+        "size": {
+          "x": 400,
+          "y": 770
+        },
+        "rotation": 0,
+        "enabled": true
+      },
+      "collisionbox": {
+        "offset": {
+          "x": -206,
+          "y": -140
+        },
+        "size": {
+          "x": 220,
+          "y": 280
+        },
+        "rotation": 0,
+        "enabled": true
+      }
+    },
+    "desk_girl/typing:2": {
+      "hurtbox": {
+        "offset": {
+          "x": -206,
+          "y": -389
+        },
+        "size": {
+          "x": 400,
+          "y": 770
+        },
+        "rotation": 0,
+        "enabled": true
+      },
+      "collisionbox": {
+        "offset": {
+          "x": -206,
+          "y": -140
+        },
+        "size": {
+          "x": 220,
+          "y": 280
+        },
+        "rotation": 0,
+        "enabled": true
+      }
+    },
+    "desk_girl/typing:3": {
+      "hurtbox": {
+        "offset": {
+          "x": -206,
+          "y": -389
+        },
+        "size": {
+          "x": 400,
+          "y": 770
+        },
+        "rotation": 0,
+        "enabled": true
+      },
+      "collisionbox": {
+        "offset": {
+          "x": -206,
+          "y": -140
+        },
+        "size": {
+          "x": 220,
+          "y": 280
+        },
+        "rotation": 0,
+        "enabled": true
+      }
+    },
+    "desk_girl/typing:4": {
+      "hurtbox": {
+        "offset": {
+          "x": -206,
+          "y": -389
+        },
+        "size": {
+          "x": 400,
+          "y": 770
+        },
+        "rotation": 0,
+        "enabled": true
+      },
+      "collisionbox": {
+        "offset": {
+          "x": -206,
+          "y": -140
+        },
+        "size": {
+          "x": 220,
+          "y": 280
+        },
+        "rotation": 0,
+        "enabled": true
+      }
+    },
+    "desk_girl/typing:5": {
+      "hurtbox": {
+        "offset": {
+          "x": -206,
+          "y": -389
+        },
+        "size": {
+          "x": 400,
+          "y": 770
+        },
+        "rotation": 0,
+        "enabled": true
+      },
+      "collisionbox": {
+        "offset": {
+          "x": -206,
+          "y": -140
+        },
+        "size": {
+          "x": 220,
+          "y": 280
+        },
+        "rotation": 0,
+        "enabled": true
+      }
+    },
+    "desk_girl/typing:6": {
+      "hurtbox": {
+        "offset": {
+          "x": -206,
+          "y": -389
+        },
+        "size": {
+          "x": 400,
+          "y": 770
+        },
+        "rotation": 0,
+        "enabled": true
+      },
+      "collisionbox": {
+        "offset": {
+          "x": -206,
+          "y": -140
+        },
+        "size": {
+          "x": 220,
+          "y": 280
+        },
+        "rotation": 0,
+        "enabled": true
+      }
+    },
+    "desk_girl/typing:7": {
+      "hurtbox": {
+        "offset": {
+          "x": -206,
+          "y": -389
+        },
+        "size": {
+          "x": 400,
+          "y": 770
+        },
+        "rotation": 0,
+        "enabled": true
+      },
+      "collisionbox": {
+        "offset": {
+          "x": -206,
+          "y": -140
+        },
+        "size": {
+          "x": 220,
+          "y": 280
+        },
+        "rotation": 0,
+        "enabled": true
+      }
+    },
+    "desk_girl/typing:8": {
+      "hurtbox": {
+        "offset": {
+          "x": -206,
+          "y": -389
+        },
+        "size": {
+          "x": 400,
+          "y": 770
+        },
+        "rotation": 0,
+        "enabled": true
+      },
+      "collisionbox": {
+        "offset": {
+          "x": -206,
+          "y": -140
+        },
+        "size": {
+          "x": 220,
+          "y": 280
+        },
+        "rotation": 0,
+        "enabled": true
+      }
+    },
+    "desk_girl/typing:9": {
+      "hurtbox": {
+        "offset": {
+          "x": -206,
+          "y": -389
+        },
+        "size": {
+          "x": 400,
+          "y": 770
+        },
+        "rotation": 0,
+        "enabled": true
+      },
+      "collisionbox": {
+        "offset": {
+          "x": -206,
+          "y": -140
+        },
+        "size": {
+          "x": 220,
+          "y": 280
+        },
+        "rotation": 0,
+        "enabled": true
+      }
+    },
+    "desk_girl/typing:10": {
+      "hurtbox": {
+        "offset": {
+          "x": -206,
+          "y": -389
+        },
+        "size": {
+          "x": 400,
+          "y": 770
+        },
+        "rotation": 0,
+        "enabled": true
+      },
+      "collisionbox": {
+        "offset": {
+          "x": -206,
+          "y": -140
+        },
+        "size": {
+          "x": 220,
+          "y": 280
+        },
+        "rotation": 0,
+        "enabled": true
+      }
+    },
+    "desk_girl/typing:11": {
+      "hurtbox": {
+        "offset": {
+          "x": -206,
+          "y": -389
+        },
+        "size": {
+          "x": 400,
+          "y": 770
+        },
+        "rotation": 0,
+        "enabled": true
+      },
+      "collisionbox": {
+        "offset": {
+          "x": -206,
+          "y": -140
+        },
+        "size": {
+          "x": 220,
+          "y": 280
+        },
+        "rotation": 0,
+        "enabled": true
+      }
+    },
+    "desk_girl/typing:12": {
+      "hurtbox": {
+        "offset": {
+          "x": -206,
+          "y": -389
+        },
+        "size": {
+          "x": 400,
+          "y": 770
+        },
+        "rotation": 0,
+        "enabled": true
+      },
+      "collisionbox": {
+        "offset": {
+          "x": -206,
+          "y": -140
+        },
+        "size": {
+          "x": 220,
+          "y": 280
+        },
+        "rotation": 0,
+        "enabled": true
+      }
+    },
+    "desk_girl/typing:13": {
+      "hurtbox": {
+        "offset": {
+          "x": -206,
+          "y": -389
+        },
+        "size": {
+          "x": 400,
+          "y": 770
+        },
+        "rotation": 0,
+        "enabled": true
+      },
+      "collisionbox": {
+        "offset": {
+          "x": -206,
+          "y": -140
+        },
+        "size": {
+          "x": 220,
+          "y": 280
+        },
+        "rotation": 0,
+        "enabled": true
+      }
+    },
+    "desk_girl/typing:14": {
+      "hurtbox": {
+        "offset": {
+          "x": -206,
+          "y": -389
+        },
+        "size": {
+          "x": 400,
+          "y": 770
+        },
+        "rotation": 0,
+        "enabled": true
+      },
+      "collisionbox": {
+        "offset": {
+          "x": -206,
+          "y": -140
+        },
+        "size": {
+          "x": 220,
+          "y": 280
+        },
+        "rotation": 0,
+        "enabled": true
+      }
+    }
+  }
+}

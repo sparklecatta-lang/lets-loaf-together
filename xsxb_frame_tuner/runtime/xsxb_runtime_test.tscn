@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://xsxb_frame_tuner/runtime/xsxb_frame_actor.tscn" id="1_actor"]
+
+[node name="XSXBRuntimeTest" type="Node2D"]
+
+[node name="XSXBFrameActor" parent="." instance=ExtResource("1_actor")]
+position = Vector2(640, 640)

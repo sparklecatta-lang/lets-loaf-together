@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/action_preview_window.gd" id="1_preview"]
+[ext_resource type="Theme" path="res://themes/companion_theme.tres" id="2_theme"]
+
+[node name="ActionPreviewWindow" type="Window"]
+title = "动作预览"
+size = Vector2i(430, 650)
+min_size = Vector2i(360, 420)
+visible = false
+always_on_top = true
+force_native = true
+wrap_controls = true
+theme = ExtResource("2_theme")
+script = ExtResource("1_preview")
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 14
+
+[node name="Content" type="VBoxContainer" parent="Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="Title" type="Label" parent="Panel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "动作预览"
+
+[node name="Hint" type="Label" parent="Panel/Margin/Content"]
+layout_mode = 2
+text = "按 T 显示或隐藏。按钮会先完整播放父动作，再进入目标动作。"
+autowrap_mode = 2
+
+[node name="Separator" type="HSeparator" parent="Panel/Margin/Content"]
+layout_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="Panel/Margin/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="ActionList" type="VBoxContainer" parent="Panel/Margin/Content/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 11
+
+[node name="StatusSeparator" type="HSeparator" parent="Panel/Margin/Content"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="Panel/Margin/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "请选择要预览的动作"
+autowrap_mode = 2
