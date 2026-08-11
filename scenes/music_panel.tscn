@@ -405,7 +405,7 @@ text = "否"
 [node name="SourceDialog" type="PopupPanel" parent="."]
 unique_name_in_owner = true
 initial_position = 1
-size = Vector2i(390, 280)
+size = Vector2i(390, 300)
 transparent_bg = true
 borderless = true
 unresizable = true
@@ -425,7 +425,7 @@ theme_override_constants/margin_bottom = 20
 
 [node name="SourceContent" type="VBoxContainer" parent="SourceDialog/SourceMargin"]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 10
 
 [node name="SourceHeading" type="Label" parent="SourceDialog/SourceMargin/SourceContent"]
 custom_minimum_size = Vector2(0, 28)
@@ -436,7 +436,7 @@ text = "音频来源"
 
 [node name="SourceText" type="Label" parent="SourceDialog/SourceMargin/SourceContent"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(342, 148)
+custom_minimum_size = Vector2(342, 96)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -445,7 +445,24 @@ theme_override_font_sizes/font_size = 13
 theme_override_constants/line_spacing = 3
 text = "当前未连接在线电台。"
 autowrap_mode = 2
-vertical_alignment = 1
+
+[node name="SourceDivider" type="ColorRect" parent="SourceDialog/SourceMargin/SourceContent"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+mouse_filter = 2
+color = Color(1, 0.84, 0.56, 0.18)
+
+[node name="SourceNotice" type="Label" parent="SourceDialog/SourceMargin/SourceContent"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(342, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.945, 0.84, 0.88)
+theme_override_font_sizes/font_size = 13
+theme_override_constants/line_spacing = 3
+text = "音乐直接来自原始在线电台；游戏不内置、录制或提供音乐文件下载。"
+autowrap_mode = 2
 
 [node name="SourceButtons" type="HBoxContainer" parent="SourceDialog/SourceMargin/SourceContent"]
 layout_mode = 2

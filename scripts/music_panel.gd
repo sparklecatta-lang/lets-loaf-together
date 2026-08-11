@@ -133,6 +133,8 @@ func _on_source_pressed() -> void:
 	if manager.stations.is_empty():
 		_source_homepage_url = ""
 		source_text.text = "当前没有可用的在线电台来源。"
+		%SourceDivider.visible = false
+		%SourceNotice.visible = false
 		%SourceHomepageButton.disabled = true
 		source_dialog.popup_centered(Vector2i(390, 220))
 		return
@@ -143,14 +145,16 @@ func _on_source_pressed() -> void:
 	var provider := str(station.get("provider", source_name))
 	var genres := str(station.get("artist", station.get("description", "")))
 	var license_name := str(station.get("license_name", "请查看来源页面"))
+	%SourceDivider.visible = true
+	%SourceNotice.visible = true
 	%SourceHomepageButton.disabled = _source_homepage_url.is_empty()
-	source_text.text = "电台：%s\n提供方：%s\n风格：%s\n授权：%s\n\n音乐直接来自原始在线电台；游戏不内置、录制或提供音乐文件下载。" % [
+	source_text.text = "电台：%s\n提供方：%s\n风格：%s\n授权：%s" % [
 		source_name,
 		provider,
 		genres,
 		license_name,
 	]
-	source_dialog.popup_centered(Vector2i(390, 280))
+	source_dialog.popup_centered(Vector2i(390, 300))
 
 
 func _on_source_homepage_pressed() -> void:

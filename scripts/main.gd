@@ -238,6 +238,8 @@ func _ready() -> void:
 		_run_window_bounds_smoke.call_deferred()
 	if "--qa-fixed-music-panel" in OS.get_cmdline_user_args():
 		_run_fixed_music_panel_smoke.call_deferred()
+	if "--qa-source-dialog-layout" in OS.get_cmdline_user_args():
+		_run_source_dialog_layout_smoke.call_deferred()
 	if OS.is_debug_build() and "--qa-radio" in OS.get_cmdline_user_args():
 		_run_audius_smoke.call_deferred()
 	if OS.is_debug_build() and "--qa-audius" in OS.get_cmdline_user_args():
@@ -2003,13 +2005,14 @@ func _capture_music_ui() -> void:
 		and music_panel.source_button.get_index() < music_panel.play_button.get_index()
 	music_panel.source_button.pressed.emit()
 	await get_tree().process_frame
-	var source_dialog_ok := music_panel.source_dialog.visible \
+	var source_dialog_ok: bool = music_panel.source_dialog.visible \
 		and music_panel.source_text.text.contains("Rain Music Radio") \
-		and music_panel.source_text.text.contains("游戏不内置")
+		and music_panel.get_node("SourceDialog/SourceMargin/SourceContent/SourceNotice").text.contains("游戏不内置")
 	var source_content := music_panel.get_node("SourceDialog/SourceMargin/SourceContent") as Control
 	var source_padding_ok: bool = source_content.position.x >= 24.0 \
 		and source_content.position.y >= 20.0 \
-		and source_content.size.x <= music_panel.source_dialog.size.x - 48.0
+		and source_content.size.x <= music_panel.source_dialog.size.x - 48.0 \
+		and _source_dialog_has_safe_spacing()
 	var source_dialog_image := get_viewport().get_texture().get_image()
 	var source_dialog_capture := source_dialog_image.save_png(
 		ProjectSettings.globalize_path("res://qa/source_dialog_styled.png")
@@ -2726,6 +2729,81 @@ func _run_fixed_music_panel_smoke() -> void:
 		ok,
 	])
 	get_tree().quit(0 if ok else 1)
+
+
+func _run_source_dialog_layout_smoke() -> void:
+	music_panel.show()
+	var all_layouts_ok := true
+	var all_captures_ok := true
+	var capture_directory := "res://qa" if OS.is_debug_build() else "user://qa"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(capture_directory))
+	var test_sizes: Array[Vector2i] = [Vector2i(626, 409), WindowController.MIN_WINDOW_SIZE]
+	var capture_names := ["source_dialog_regular.png", "source_dialog_minimum.png"]
+	for index in test_sizes.size():
+		DisplayServer.window_set_size(test_sizes[index])
+		await get_tree().process_frame
+		await get_tree().process_frame
+		music_panel.source_dialog.hide()
+		music_panel.source_button.pressed.emit()
+		await get_tree().process_frame
+		await get_tree().process_frame
+		var layout_ok := _source_dialog_has_safe_spacing()
+		var image := get_viewport().get_texture().get_image()
+		var capture_result := image.save_png(
+			ProjectSettings.globalize_path("%s/%s" % [capture_directory, capture_names[index]])
+		) if image != null else ERR_CANT_CREATE
+		all_layouts_ok = all_layouts_ok and layout_ok
+		all_captures_ok = all_captures_ok and capture_result == OK
+		print("SOURCE_DIALOG_LAYOUT size=%s dialog=%s layout=%s capture=%d" % [
+			DisplayServer.window_get_size(),
+			music_panel.source_dialog.size,
+			layout_ok,
+			capture_result,
+		])
+		music_panel.source_dialog.hide()
+	var ok := all_layouts_ok and all_captures_ok
+	print("SOURCE_DIALOG_LAYOUT_SMOKE layouts=%s captures=%s ok=%s" % [
+		all_layouts_ok,
+		all_captures_ok,
+		ok,
+	])
+	get_tree().quit(0 if ok else 1)
+
+
+func _source_dialog_has_safe_spacing() -> bool:
+	var source_content := music_panel.get_node("SourceDialog/SourceMargin/SourceContent") as Control
+	var source_text := music_panel.get_node("SourceDialog/SourceMargin/SourceContent/SourceText") as Control
+	var source_divider := music_panel.get_node("SourceDialog/SourceMargin/SourceContent/SourceDivider") as Control
+	var source_notice := music_panel.get_node("SourceDialog/SourceMargin/SourceContent/SourceNotice") as Label
+	var source_buttons := music_panel.get_node("SourceDialog/SourceMargin/SourceContent/SourceButtons") as Control
+	var details_gap := source_divider.position.y - (source_text.position.y + source_text.size.y)
+	var notice_gap := source_notice.position.y - (source_divider.position.y + source_divider.size.y)
+	var buttons_gap := source_buttons.position.y - (source_notice.position.y + source_notice.size.y)
+	var content_bottom_gap := source_content.size.y - (source_buttons.position.y + source_buttons.size.y)
+	var dialog_bottom_gap := music_panel.source_dialog.size.y \
+		- (source_content.position.y + source_content.size.y)
+	var dialog_inside_window := music_panel.source_dialog.position.x >= 0 \
+		and music_panel.source_dialog.position.y >= 0 \
+		and music_panel.source_dialog.position.x + music_panel.source_dialog.size.x <= size.x \
+		and music_panel.source_dialog.position.y + music_panel.source_dialog.size.y <= size.y
+	print("SOURCE_DIALOG_SPACING details=%.1f notice=%.1f buttons=%.1f content_bottom=%.1f dialog_bottom=%.1f inside=%s" % [
+		details_gap,
+		notice_gap,
+		buttons_gap,
+		content_bottom_gap,
+		dialog_bottom_gap,
+		dialog_inside_window,
+	])
+	return music_panel.source_dialog.visible \
+		and music_panel.source_dialog.size.x >= 390 \
+		and music_panel.source_dialog.size.y >= 300 \
+		and source_notice.text.contains("游戏不内置") \
+		and details_gap >= 9.0 \
+		and notice_gap >= 9.0 \
+		and buttons_gap >= 9.0 \
+		and content_bottom_gap >= 0.0 \
+		and dialog_bottom_gap >= 20.0 \
+		and dialog_inside_window
 
 
 func _run_audius_smoke() -> void:

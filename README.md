@@ -27,14 +27,14 @@
 | 平台 | 下载 | 大小 |
 | --- | --- | ---: |
 | Windows | 修复版上传中（旧链接已撤下） | 231.02 MiB |
-| macOS | [百度网盘](https://pan.baidu.com/s/1TcmWLXqB-iCwHwgcuaYwiw?pwd=pi2g) · 提取码 `pi2g` | 243.55 MiB |
+| macOS | 修复版上传中（旧链接已撤下） | 243.55 MiB |
 
 <details>
 <summary>查看文件 SHA-256 校验值</summary>
 
 ```text
-Windows  cfbb53558da5c46b851a7c776460ef83cd6b8b014f43a516f7a53c508deb42bb
-macOS    0d488146c084aa96dd18f37c1b2428782f7e372bb8fcf44af950fc4e76077f64
+Windows  0725906d0b76a7854dc7cacedaf3a2ff1f42ffdd9e9e6bf5d01bd32452b772a7
+macOS    4022e48fa56e5f13a922f34717cc5208fc5e9332ecd5bfba04c79f635e124037
 ```
 
 </details>
