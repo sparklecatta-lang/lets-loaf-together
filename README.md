@@ -24,10 +24,20 @@
 
 普通玩家只需要下载对应平台的完整包。美术、动画、本地音效和在线音乐播放器都已经放在包内，不需要再安装 Godot 或另外下载素材。
 
-| 平台 | 下载 | 大小 | SHA-256 |
-| --- | --- | ---: | --- |
-| Windows | [百度网盘](https://pan.baidu.com/s/1ewj1kPKC7ISZgI250doE0Q?pwd=rytj) · 提取码 `rytj` | 230.87 MiB | `6f5c86ceb90da8fd89ccdeefc1065460c142e12a575e2f4fbc656758e79f6cb0` |
-| macOS | [百度网盘](https://pan.baidu.com/s/1TcmWLXqB-iCwHwgcuaYwiw?pwd=pi2g) · 提取码 `pi2g` | 243.55 MiB | `0d488146c084aa96dd18f37c1b2428782f7e372bb8fcf44af950fc4e76077f64` |
+| 平台 | 下载 | 大小 |
+| --- | --- | ---: |
+| Windows | [百度网盘](https://pan.baidu.com/s/1ewj1kPKC7ISZgI250doE0Q?pwd=rytj) · 提取码 `rytj` | 230.87 MiB |
+| macOS | [百度网盘](https://pan.baidu.com/s/1TcmWLXqB-iCwHwgcuaYwiw?pwd=pi2g) · 提取码 `pi2g` | 243.55 MiB |
+
+<details>
+<summary>查看文件 SHA-256 校验值</summary>
+
+```text
+Windows  6f5c86ceb90da8fd89ccdeefc1065460c142e12a575e2f4fbc656758e79f6cb0
+macOS    0d488146c084aa96dd18f37c1b2428782f7e372bb8fcf44af950fc4e76077f64
+```
+
+</details>
 
 Windows 解压后双击 `LetsLoafTogether.exe`。macOS 解压后打开“一起磨洋工.app”；当前没有 Apple 开发者签名或公证，首次打开可能出现系统安全提示。macOS 包包含 Intel 与 Apple Silicon 两种播放器，但目前只完成了包结构和架构校验，尚未在真实 Mac 上运行测试。
 
