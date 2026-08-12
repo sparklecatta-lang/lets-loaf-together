@@ -276,8 +276,15 @@ use_frame_boxes = false
 
 [node name="MartialCatFigurine" type="Sprite2D" parent="VisualViewport/CharacterLayer"]
 unique_name_in_owner = true
-position = Vector2(260, 343)
+position = Vector2(260, 333)
 texture = ExtResource("11_martial_cat_figurine")
+
+[node name="MartialCatFigurineShadow" type="Sprite2D" parent="VisualViewport/CharacterLayer/MartialCatFigurine"]
+position = Vector2(-4, 60)
+z_index = -1
+scale = Vector2(0.17, 0.022)
+self_modulate = Color(0.1, 0.15, 0.23, 0.25)
+texture = SubResource("GradientTexture2D_room_key_light")
 
 [node name="CatFoodBagShadow" type="Line2D" parent="VisualViewport/CharacterLayer"]
 unique_name_in_owner = true

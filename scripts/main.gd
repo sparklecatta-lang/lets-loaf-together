@@ -2737,8 +2737,16 @@ func _run_source_dialog_layout_smoke() -> void:
 	var all_captures_ok := true
 	var capture_directory := "res://qa" if OS.is_debug_build() else "user://qa"
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(capture_directory))
-	var test_sizes: Array[Vector2i] = [Vector2i(626, 409), WindowController.MIN_WINDOW_SIZE]
-	var capture_names := ["source_dialog_regular.png", "source_dialog_minimum.png"]
+	var test_sizes: Array[Vector2i] = [
+		Vector2i(626, 409),
+		Vector2i(575, 419),
+		WindowController.MIN_WINDOW_SIZE,
+	]
+	var capture_names := [
+		"source_dialog_regular.png",
+		"source_dialog_reported_size.png",
+		"source_dialog_minimum.png",
+	]
 	for index in test_sizes.size():
 		DisplayServer.window_set_size(test_sizes[index])
 		await get_tree().process_frame
@@ -2772,7 +2780,7 @@ func _run_source_dialog_layout_smoke() -> void:
 
 func _source_dialog_has_safe_spacing() -> bool:
 	var source_content := music_panel.get_node("SourceDialog/SourceMargin/SourceContent") as Control
-	var source_text := music_panel.get_node("SourceDialog/SourceMargin/SourceContent/SourceText") as Control
+	var source_text := music_panel.get_node("SourceDialog/SourceMargin/SourceContent/SourceText") as Label
 	var source_divider := music_panel.get_node("SourceDialog/SourceMargin/SourceContent/SourceDivider") as Control
 	var source_notice := music_panel.get_node("SourceDialog/SourceMargin/SourceContent/SourceNotice") as Label
 	var source_buttons := music_panel.get_node("SourceDialog/SourceMargin/SourceContent/SourceButtons") as Control
@@ -2782,27 +2790,39 @@ func _source_dialog_has_safe_spacing() -> bool:
 	var content_bottom_gap := source_content.size.y - (source_buttons.position.y + source_buttons.size.y)
 	var dialog_bottom_gap := music_panel.source_dialog.size.y \
 		- (source_content.position.y + source_content.size.y)
+	var details_text_fits: bool = source_text.get_line_count() <= source_text.get_visible_line_count()
+	var notice_text_fits: bool = source_notice.get_line_count() <= source_notice.get_visible_line_count()
+	var content_fits_horizontally: bool = source_content.position.x >= 0.0 \
+		and source_content.position.x + source_content.size.x <= music_panel.source_dialog.size.x
 	var dialog_inside_window := music_panel.source_dialog.position.x >= 0 \
 		and music_panel.source_dialog.position.y >= 0 \
 		and music_panel.source_dialog.position.x + music_panel.source_dialog.size.x <= size.x \
 		and music_panel.source_dialog.position.y + music_panel.source_dialog.size.y <= size.y
-	print("SOURCE_DIALOG_SPACING details=%.1f notice=%.1f buttons=%.1f content_bottom=%.1f dialog_bottom=%.1f inside=%s" % [
+	print("SOURCE_DIALOG_SPACING details=%.1f notice=%.1f buttons=%.1f content_bottom=%.1f dialog_bottom=%.1f details_fit=%s notice_fit=%s horizontal_fit=%s inside=%s" % [
 		details_gap,
 		notice_gap,
 		buttons_gap,
 		content_bottom_gap,
 		dialog_bottom_gap,
+		details_text_fits,
+		notice_text_fits,
+		content_fits_horizontally,
 		dialog_inside_window,
 	])
 	return music_panel.source_dialog.visible \
 		and music_panel.source_dialog.size.x >= 390 \
-		and music_panel.source_dialog.size.y >= 300 \
-		and source_notice.text.contains("游戏不内置") \
-		and details_gap >= 9.0 \
-		and notice_gap >= 9.0 \
-		and buttons_gap >= 9.0 \
+		and music_panel.source_dialog.size.y >= 274 \
+		and music_panel.source_dialog.size.y <= 300 \
+		and source_notice.text.contains("游戏不提供音乐文件下载") \
+		and details_gap >= 8.0 \
+		and notice_gap >= 8.0 \
+		and buttons_gap >= 8.0 \
 		and content_bottom_gap >= 0.0 \
-		and dialog_bottom_gap >= 20.0 \
+		and content_bottom_gap <= 4.0 \
+		and dialog_bottom_gap >= 18.0 \
+		and details_text_fits \
+		and notice_text_fits \
+		and content_fits_horizontally \
 		and dialog_inside_window
 
 

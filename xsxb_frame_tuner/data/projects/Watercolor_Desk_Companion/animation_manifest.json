@@ -2724,7 +2724,7 @@
           "name": "mischief",
           "type": "prop",
           "anchorMode": "canvas_bottom_center",
-          "fps": 7.6923076923076925,
+          "fps": 6.25,
           "source": "xsxb_frame_tuner/workspace/projects/Watercolor_Desk_Companion/assets/yellow_cat/mischief",
           "frames": [
             {

@@ -25,7 +25,7 @@ func _run() -> void:
 	var first_frame := int(actor.get("_current_frame"))
 	await create_timer(0.23).timeout
 	var advanced_frame := int(actor.get("_current_frame"))
-	var last_frame_visible := bool(actor.call("show_frame", "mischief", 45))
+	var last_frame_visible := bool(actor.call("show_frame", "mischief", 90))
 	var sprite := actor.get_node("VisualOwner/FrameSprite") as Sprite2D
 	var texture_size := sprite.texture.get_size() if sprite.texture != null else Vector2.ZERO
 
@@ -37,9 +37,9 @@ func _run() -> void:
 			break
 
 	var ok := has_animation \
-		and frame_count == 46 \
-		and is_equal_approx(fps, 5.263158) \
-		and is_equal_approx(duration, 8.74) \
+		and frame_count == 91 \
+		and is_equal_approx(fps, 6.25) \
+		and is_equal_approx(duration, 14.56) \
 		and first_frame == 0 \
 		and advanced_frame > first_frame \
 		and last_frame_visible \

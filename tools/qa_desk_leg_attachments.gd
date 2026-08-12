@@ -87,6 +87,6 @@ func _run() -> void:
 			ok,
 		]
 	)
-	girl.queue_free()
-	cat.queue_free()
+	girl.free()
+	cat.free()
 	quit(0 if ok else 1)

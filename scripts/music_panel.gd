@@ -136,7 +136,7 @@ func _on_source_pressed() -> void:
 		%SourceDivider.visible = false
 		%SourceNotice.visible = false
 		%SourceHomepageButton.disabled = true
-		source_dialog.popup_centered(Vector2i(390, 220))
+		source_dialog.popup_centered(Vector2i(400, 220))
 		return
 	var station_index := manager.current_index if manager.current_index >= 0 else 0
 	var station := manager.stations[station_index]
@@ -145,6 +145,8 @@ func _on_source_pressed() -> void:
 	var provider := str(station.get("provider", source_name))
 	var genres := str(station.get("artist", station.get("description", "")))
 	var license_name := str(station.get("license_name", "请查看来源页面"))
+	if license_name == "Creative Commons; original music by the station":
+		license_name = "Creative Commons（电台原创）"
 	%SourceDivider.visible = true
 	%SourceNotice.visible = true
 	%SourceHomepageButton.disabled = _source_homepage_url.is_empty()
@@ -154,7 +156,7 @@ func _on_source_pressed() -> void:
 		genres,
 		license_name,
 	]
-	source_dialog.popup_centered(Vector2i(390, 300))
+	source_dialog.popup_centered(Vector2i(400, 274))
 
 
 func _on_source_homepage_pressed() -> void:

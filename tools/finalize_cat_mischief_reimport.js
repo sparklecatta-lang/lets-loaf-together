@@ -93,6 +93,7 @@ function main() {
   const tunerRoot = path.resolve(args["tuner-root"] || "");
   const projectRoot = path.resolve(args["project-root"] || "");
   const frameCount = Number(args["frame-count"] || 0);
+  const preserveAudio = String(args["preserve-audio"] || "").toLowerCase() === "true";
   if (!fs.existsSync(path.join(tunerRoot, "tools", "godot_sync.js"))) {
     throw new Error(`Invalid tuner root: ${tunerRoot}`);
   }
@@ -112,8 +113,11 @@ function main() {
   writeJson(tuningPath, tuning);
 
   const audio = readJson(audioPath);
-  const removedAudio = audio.filter(isMischiefBinding);
-  writeJson(audioPath, audio.filter((entry) => !isMischiefBinding(entry)));
+  const matchingAudio = audio.filter(isMischiefBinding);
+  const removedAudio = preserveAudio ? [] : matchingAudio;
+  if (!preserveAudio) {
+    writeJson(audioPath, audio.filter((entry) => !isMischiefBinding(entry)));
+  }
 
   const attachments = readJson(attachmentsPath);
   const rebuiltAttachments = rebuildAttachments(attachments, frameCount);
@@ -131,6 +135,7 @@ function main() {
 
   console.log(JSON.stringify({
     removedOverrides,
+    preservedAudioBindings: preserveAudio ? matchingAudio.length : 0,
     removedAudioBindings: removedAudio.length,
     removedAudioNames: removedAudio.map((entry) => entry.name),
     attachmentsBefore: rebuiltAttachments.oldCount,
