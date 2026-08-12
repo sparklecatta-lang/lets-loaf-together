@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$GodotExe = "",
     [switch]$CheckExternalAssetsOnly
@@ -8,7 +8,11 @@ $ErrorActionPreference = "Stop"
 
 $projectDirectory = $PSScriptRoot
 $audioDirectory = Join-Path $projectDirectory "xsxb_frame_tuner\audio"
-$externalAssetsManifestPath = Join-Path $projectDirectory "data\external_assets.json"
+$requiredRuntimeAssets = @(
+    "assets\backgrounds\yellow_cat_window_room\cream_table_room_20260810\室内背景_奶白桌面适配_窗洞透明.png",
+    "assets\props\game_figurines\huanchao_martial_cat\武术猫手办_原比例无高光_桌面尺寸.png",
+    "xsxb_frame_tuner\workspace\projects\Watercolor_Desk_Companion\assets\yellow_cat\mischief\frame_0001.png"
+)
 
 function Resolve-GodotExecutable {
     param([string]$ConfiguredPath)
@@ -45,13 +49,8 @@ function Resolve-GodotExecutable {
 }
 
 function Get-MissingExternalAssets {
-    if (-not (Test-Path -LiteralPath $externalAssetsManifestPath -PathType Leaf)) {
-        return @("data/external_assets.json")
-    }
-
-    $manifest = Get-Content -LiteralPath $externalAssetsManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
     return @(
-        $manifest.required_files |
+        $requiredRuntimeAssets |
             Where-Object {
                 -not (Test-Path -LiteralPath (Join-Path $projectDirectory $_) -PathType Leaf)
             }
@@ -71,35 +70,20 @@ if ($CheckExternalAssetsOnly) {
 }
 
 if ($missingExternalAssets.Count -gt 0) {
-    $manifest = Get-Content -LiteralPath $externalAssetsManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
-    $googleDrive = $manifest.download_mirrors | Where-Object { $_.name -eq "Google Drive" } | Select-Object -First 1
-    $baidu = $manifest.download_mirrors | Where-Object { $_.name -eq "百度网盘" } | Select-Object -First 1
-    $message = @"
-游戏缺少美术与音频素材（检测到 $($missingExternalAssets.Count) 个关键文件缺失）。
-
-请下载 $($manifest.archive_name)，然后直接解压到：
-$projectDirectory
-
-解压后，该目录下应直接包含 assets 和 xsxb_frame_tuner 文件夹。
-
-选择“是”：打开 Google Drive
-选择“否”：打开百度网盘（提取码：$($baidu.access_code)）
-选择“取消”：暂不下载
-"@
+    $message = @(
+        "游戏缺少美术与音频素材（检测到 $($missingExternalAssets.Count) 个关键文件缺失）。",
+        "",
+        "GitHub 仓库不包含这些大体积素材，也不再提供单独的美术资源包。",
+        "普通玩家请从 README 下载 Windows 或 macOS 完整包。"
+    ) -join [Environment]::NewLine
 
     Add-Type -AssemblyName System.Windows.Forms
-    $choice = [System.Windows.Forms.MessageBox]::Show(
+    [void][System.Windows.Forms.MessageBox]::Show(
         $message,
-        "一起磨洋工 - 需要素材包",
-        [System.Windows.Forms.MessageBoxButtons]::YesNoCancel,
+        "一起磨洋工 - 运行素材缺失",
+        [System.Windows.Forms.MessageBoxButtons]::OK,
         [System.Windows.Forms.MessageBoxIcon]::Warning
     )
-    if ($choice -eq [System.Windows.Forms.DialogResult]::Yes) {
-        Start-Process $googleDrive.url
-    }
-    elseif ($choice -eq [System.Windows.Forms.DialogResult]::No) {
-        Start-Process $baidu.url
-    }
     exit 2
 }
 

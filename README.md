@@ -26,15 +26,15 @@
 
 | 平台 | 下载 | 大小 |
 | --- | --- | ---: |
-| Windows | 修复版上传中（旧链接已撤下） | 231.02 MiB |
-| macOS | 修复版上传中（旧链接已撤下） | 243.55 MiB |
+| Windows | [百度网盘](https://pan.baidu.com/s/1Qxx0bIBh-HlycpYKCvYMJA?pwd=hcax) · 提取码 `hcax` | 229.14 MiB |
+| macOS | [百度网盘](https://pan.baidu.com/s/1etKcApNfvNrhvXbS1TJz0g?pwd=7mt5) · 提取码 `7mt5` | 241.68 MiB |
 
 <details>
 <summary>查看文件 SHA-256 校验值</summary>
 
 ```text
-Windows  0725906d0b76a7854dc7cacedaf3a2ff1f42ffdd9e9e6bf5d01bd32452b772a7
-macOS    4022e48fa56e5f13a922f34717cc5208fc5e9332ecd5bfba04c79f635e124037
+Windows  a5658b46eec3b7fa1e6cb6c504803ea0fb311e65a6a11cd35a2933496a52667b
+macOS    edb7b5a4340fd3a1f380a9fa9bb8ba7f1e142973004be5dcfcbf79e7f9f2fde8
 ```
 
 </details>
@@ -81,36 +81,23 @@ Windows 解压后双击 `LetsLoafTogether.exe`。macOS 解压后打开“一起�
 - macOS 完整包同时随附 Intel 与 Apple Silicon 版 FFplay；暂停或调节音量时会重新连接直播流。
 - 电台来源、授权说明和发行边界见 [docs/radio.md](docs/radio.md)。完整包内附 FFmpeg GPL 许可证和第三方声明。
 
-## 从源码运行
+## 源码说明
 
-本仓库保存程序代码、场景、配置、着色器、动画元数据和必要图标；大体积美术、动画帧与本地音频单独存放。源码运行需要 Godot 4.7。
+本仓库保存程序代码、场景、配置、着色器、动画元数据和必要图标，供学习和继续开发使用。大体积美术、动画帧与本地音频不进入 GitHub，也不再提供单独的美术资源包；普通玩家请直接下载上面的 Windows 或 macOS 完整包。
 
-### 1. 获取源码构建者素材包
+本地拥有完整素材的开发者可使用 Godot 4.7 运行项目：
 
-下载 `LetsLoafTogether-ArtAudio.zip`（166.75 MiB）：
-
-- [Google Drive](https://drive.google.com/file/d/14hr-PRQ4gTomjQCN2RJvOxr4cmrr5voU/view?usp=sharing)
-- [百度网盘](https://pan.baidu.com/s/1ayXlGbPS89eKCPRi9rRdvw?pwd=qdf6) · 提取码 `qdf6`
-- SHA-256：`53f05bad9a8557bddcc4c79254e0d543ff7f0eaf30b0202a74b47ba61666c5a6`
-
-把压缩包直接解压到项目根目录，使其中的 `assets` 与 `xsxb_frame_tuner` 合并到项目内同名目录，不要额外套一层文件夹。素材缺失时，`run_companion.ps1` 会显示下载入口和正确目标目录。
-
-### 2. 启动项目
-
-把 Godot 加入 `PATH`、放到项目根目录，或者显式指定可执行文件：
+把 Godot 加入 `PATH`、放到项目根目录，或显式指定可执行文件：
 
 ```powershell
 & '.\run_companion.ps1' -GodotExe 'C:\path\to\Godot_v4.7-stable_win64.exe'
 ```
 
-如果 Godot 已经加入 `PATH`，可直接运行根目录的 `run_companion.ps1`。
+如果缺少运行素材，`run_companion.ps1` 会停止启动并说明当前仓库不提供单独素材下载。
 
-### 3. 重新打包
+### 重新打包完整程序
 
 ```powershell
-# 生成源码构建者素材包
-& '.\tools\package_external_assets.ps1'
-
 # 生成 Windows 与 macOS 完整包
 & '.\tools\package_full_releases.ps1'
 
@@ -128,4 +115,4 @@ Windows 解压后双击 `LetsLoafTogether.exe`。macOS 解压后打开“一起�
 
 ## 许可证
 
-仓库中的程序代码以 [MIT License](LICENSE) 开源。外置美术、动画与音频素材不随源码仓库授权；FFplay、Godot 和在线电台分别遵循各自许可证与服务条款。
+仓库中的程序代码以 [MIT License](LICENSE) 开源。美术、动画与音频素材不随源码仓库授权，也不作为独立资源包分发；FFplay、Godot 和在线电台分别遵循各自许可证与服务条款。
